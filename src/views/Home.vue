@@ -9,7 +9,7 @@
       <button v-on:click="addReview()">Add Review</button>
     </div>
 
-    <div v-for="review in reviews">
+    <div v-for="review in reviews" v-if="isPositive(review)">
       <h2>{{ review.reviewer }} - {{ review.rating }} Stars</h2>
       <p>{{ review.text }}</p>
     </div>
@@ -58,8 +58,21 @@ export default {
       };
 
       this.reviews.push(reviewParams);
+    },
+    isPositive: function(inputReview) {
+      var stupidCheck = inputReview.text.indexOf('stupid') === -1;
+      var sucksCheck = inputReview.text.indexOf('sucks') === -1;
+
+      return stupidCheck && sucksCheck;
     }
   },
   computed: {}
 };
 </script>
+
+
+
+
+
+
+
