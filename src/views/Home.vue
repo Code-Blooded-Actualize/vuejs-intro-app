@@ -51,13 +51,10 @@ export default {
   created: function() {},
   methods: {
     addReview: function() {
-      var reviewParams = {
-        text: this.newReview.text,
-        rating: this.newReview.rating,
-        reviewer: this.newReview.reviewer
-      };
-
-      this.reviews.push(reviewParams);
+      if (this.newReview.text && this.newReview.rating && this.newReview.reviewer) {
+        this.reviews.push(this.newReview);
+        this.newReview = {text: "", rating: "", reviewer: ""};
+      }
     },
     isPositive: function(inputReview) {
       var stupidCheck = inputReview.text.indexOf('stupid') === -1;
