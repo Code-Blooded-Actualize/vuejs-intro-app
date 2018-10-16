@@ -1,7 +1,13 @@
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
-    <input v-model="message">
+    <h1>Vue.js Reviews</h1>
+
+    <div>
+      Review: <input v-model="newReview.text">
+      Rating: <input v-model="newReview.rating">
+      Your Name: <input v-model="newReview.reviewer">
+      <button v-on:click="addReview()">Add Review</button>
+    </div>
 
     <div v-for="review in reviews">
       <h2>{{ review.reviewer }} - {{ review.rating }} Stars</h2>
@@ -12,9 +18,9 @@
 </template>
 
 <style>
-body {
-  background-color: lightblue;
-}
+  body {
+    background-color: lightblue;
+  }
 </style>
 
 <script>
@@ -38,11 +44,22 @@ export default {
           rating: 1,
           reviewer: "Oscar the Grouch"
         }
-      ]
+      ],
+      newReview: {text: "", rating: "", reviewer: ""}
     };
   },
   created: function() {},
-  methods: {},
+  methods: {
+    addReview: function() {
+      var reviewParams = {
+        text: this.newReview.text,
+        rating: this.newReview.rating,
+        reviewer: this.newReview.reviewer
+      };
+
+      this.reviews.push(reviewParams);
+    }
+  },
   computed: {}
 };
 </script>
